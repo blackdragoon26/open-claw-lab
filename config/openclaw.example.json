@@ -2,6 +2,10 @@
   "agents": {
     "defaults": {
       "workspace": "/home/openclaw/.openclaw/workspace-main",
+      "model": "google/gemini-2.5-flash",
+      "memorySearch": {
+        "enabled": false
+      },
       "heartbeat": {
         "every": "0m"
       }

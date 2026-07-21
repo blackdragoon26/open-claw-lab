@@ -32,6 +32,8 @@ test("creates isolated least-privilege agents and Telegram allowlists", () => {
   assert.equal(result.channels.telegram.groups, undefined);
   assert.deepEqual(result.commands.ownerAllowFrom, ["telegram:123"]);
   assert.equal(result.agents.defaults.heartbeat.every, "0m");
+  assert.equal(result.agents.defaults.model, "google/gemini-2.5-flash");
+  assert.equal(result.agents.defaults.memorySearch.enabled, false);
   assert.equal(result.tools.fs.workspaceOnly, true);
   assert.equal(result.tools.elevated.enabled, false);
 });

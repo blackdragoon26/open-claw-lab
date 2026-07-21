@@ -11,6 +11,8 @@ export function hardenConfig(input, { telegramUser, repoRoot = "/home/openclaw/o
     defaults: {
       ...existingDefaults,
       workspace: "/home/openclaw/.openclaw/workspace-main",
+      model: "google/gemini-2.5-flash",
+      memorySearch: { ...(existingDefaults.memorySearch || {}), enabled: false },
       heartbeat: { ...(existingDefaults.heartbeat || {}), every: "0m" }
     },
     list: [
