@@ -28,6 +28,7 @@ test("creates isolated least-privilege agents and Telegram allowlists", () => {
   assert.ok(result.agents.list.every((agent) => agent.tools.deny.includes("exec")));
   assert.deepEqual(result.channels.telegram.allowFrom, ["123"]);
   assert.deepEqual(result.channels.telegram.groupAllowFrom, ["123"]);
+  assert.deepEqual(result.commands.ownerAllowFrom, ["telegram:123"]);
   assert.equal(result.agents.defaults.heartbeat.every, "0m");
   assert.equal(result.tools.fs.workspaceOnly, true);
 });

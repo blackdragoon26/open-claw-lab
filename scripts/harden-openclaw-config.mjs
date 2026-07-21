@@ -68,6 +68,11 @@ export function hardenConfig(input, { telegramUser, repoRoot = "/home/openclaw/o
     fs: { ...(config.tools?.fs || {}), workspaceOnly: true }
   };
 
+  config.commands = {
+    ...(config.commands || {}),
+    ownerAllowFrom: [`telegram:${telegramUser}`]
+  };
+
   const telegram = config.channels?.telegram || {};
   config.channels = {
     ...(config.channels || {}),
