@@ -1,0 +1,85 @@
+{
+  "agents": {
+    "defaults": {
+      "workspace": "/home/openclaw/.openclaw/workspace-main",
+      "heartbeat": {
+        "every": "0m"
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true,
+        "workspace": "/home/openclaw/.openclaw/workspace-main",
+        "model": "google/gemini-2.5-flash",
+        "tools": {
+          "profile": "messaging",
+          "alsoAllow": ["group:web", "group:memory"],
+          "deny": ["exec", "process", "write", "edit", "apply_patch", "browser", "nodes"]
+        }
+      },
+      {
+        "id": "career-scout",
+        "workspace": "/home/openclaw/open-claw-lab/workspaces/scout",
+        "model": "google/gemini-2.5-flash",
+        "tools": {
+          "profile": "minimal",
+          "alsoAllow": ["group:web"],
+          "deny": ["exec", "process", "write", "edit", "apply_patch", "group:messaging", "browser", "nodes", "cron"]
+        }
+      },
+      {
+        "id": "career-reviewer",
+        "workspace": "/home/openclaw/open-claw-lab/workspaces/reviewer",
+        "model": "google/gemini-3.1-pro-preview",
+        "tools": {
+          "profile": "minimal",
+          "alsoAllow": ["group:web"],
+          "deny": ["exec", "process", "write", "edit", "apply_patch", "group:messaging", "browser", "nodes", "cron"]
+        }
+      }
+    ]
+  },
+  "gateway": {
+    "mode": "local",
+    "bind": "loopback",
+    "port": 18789,
+    "auth": {
+      "mode": "token",
+      "rateLimit": {
+        "maxAttempts": 10,
+        "windowMs": 60000,
+        "lockoutMs": 300000
+      }
+    },
+    "controlUi": {
+      "allowInsecureAuth": false
+    }
+  },
+  "tools": {
+    "profile": "minimal",
+    "fs": {
+      "workspaceOnly": true
+    },
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "tavily"
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "allowlist",
+      "allowFrom": ["replace-with-approved-user-id"],
+      "groupAllowFrom": ["replace-with-approved-user-id"],
+      "groups": {
+        "*": {
+          "requireMention": true,
+          "allowFrom": ["replace-with-approved-user-id"]
+        }
+      }
+    }
+  }
+}

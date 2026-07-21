@@ -1,0 +1,15 @@
+{
+  "name": "open-claw-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Evidence-gated OpenClaw career research pipeline",
+  "scripts": {
+    "test": "node --test",
+    "dry-run": "node scripts/run-pipeline.mjs --dry-run --input fixtures/raw-leads.json --skip-review",
+    "secret-scan": "node scripts/secret-scan.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,11 @@
+[Unit]
+Description=Run OpenClaw career scout every morning
+
+[Timer]
+OnCalendar=*-*-* 07:00:00 Asia/Kolkata
+Persistent=true
+RandomizedDelaySec=120
+Unit=openclaw-career-scout.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "japan-remote-valid",
+    "discoveredAt": "2026-07-21T07:00:00.000Z",
+    "lane": "japan",
+    "company": {"name":"Sakura Systems","domain":"sakura.example","employeeCount":120,"sizeEvidenceUrl":"https://sakura.example/about","fundingSourceUrl":null},
+    "opportunity": {"title":"Junior Backend Engineer","employmentType":"full-time","location":"Japan or remote","workMode":"remote","remotePolicy":"APAC including India","eligibilityEvidence":"Candidates in India and APAC may work remotely.","sourceUrl":"https://sakura.example/jobs/backend","minYearsExperience":1,"relocation":{"supported":false,"evidenceUrl":null,"evidence":null}},
+    "hiringSignal": {"kind":"official_job","url":"https://sakura.example/jobs/backend","publishedAt":"2026-06-01","quote":"Junior backend engineer, remote across APAC."},
+    "contact": {"name":"Aiko Example","role":"Talent Partner","roleEvidenceUrl":"https://sakura.example/team/aiko","publicProfileUrl":"https://sakura.example/team/aiko","email":null,"emailEvidenceUrl":null,"applicationUrl":"https://sakura.example/jobs/backend/apply"},
+    "fit": {"score":91,"reasons":["Go backend","cloud infrastructure"]}
+  },
+  {
+    "id": "global-onsite-valid",
+    "discoveredAt": "2026-07-21T07:00:00.000Z",
+    "lane": "global",
+    "company": {"name":"Packet Forge","domain":"packetforge.example","employeeCount":35,"sizeEvidenceUrl":"https://packetforge.example/about","fundingSourceUrl":"https://fund.example/packet-forge"},
+    "opportunity": {"title":"Systems Engineer","employmentType":"full-time","location":"Berlin, Germany","workMode":"onsite","remotePolicy":null,"eligibilityEvidence":"International applicants welcome.","sourceUrl":"https://packetforge.example/jobs/systems","minYearsExperience":0,"relocation":{"supported":true,"evidenceUrl":"https://packetforge.example/jobs/relocation","evidence":"Visa sponsorship and relocation costs are provided."}},
+    "hiringSignal": {"kind":"founder_post","url":"https://packetforge.example/blog/hiring","publishedAt":"2026-07-10","quote":"We are hiring a systems engineer and sponsor relocation."},
+    "contact": {"name":"Pat Example","role":"Co-founder and CTO","roleEvidenceUrl":"https://packetforge.example/about","publicProfileUrl":"https://packetforge.example/about","email":null,"emailEvidenceUrl":null,"applicationUrl":"https://packetforge.example/jobs/systems/apply"},
+    "fit": {"score":88,"reasons":["P4 networking","systems programming"]}
+  },
+  {
+    "id": "bad-guessed-email",
+    "discoveredAt": "2026-07-21T07:00:00.000Z",
+    "lane": "global",
+    "company": {"name":"Guess Corp","domain":"guess.example","employeeCount":200,"sizeEvidenceUrl":"https://guess.example/about"},
+    "opportunity": {"title":"Backend Engineer","employmentType":"full-time","location":"Remote US","workMode":"remote","remotePolicy":"US only","eligibilityEvidence":"Applicants must reside in the United States.","sourceUrl":"https://guess.example/jobs/1","minYearsExperience":4},
+    "hiringSignal": {"kind":"social_post","url":"https://guess.example/post","publishedAt":"2026-01-01","quote":"We might be hiring."},
+    "contact": {"name":"Random Person","role":"Senior Developer","roleEvidenceUrl":"https://guess.example/team","publicProfileUrl":null,"email":"random@guess.example","emailEvidenceUrl":null,"applicationUrl":null},
+    "fit": {"score":70,"reasons":["backend"]}
+  }
+]

@@ -1,0 +1,22 @@
+[Unit]
+Description=OpenClaw evidence-gated career scout
+After=network-online.target openclaw-gateway.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=openclaw
+Group=openclaw
+WorkingDirectory=/home/openclaw/open-claw-lab
+EnvironmentFile=/home/openclaw/open-claw-lab/private/pipeline.env
+ExecStart=/usr/bin/node /home/openclaw/open-claw-lab/scripts/run-pipeline.mjs
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/openclaw/open-claw-lab/var
+UMask=0077
+TimeoutStartSec=1800
+
+[Install]
+WantedBy=multi-user.target

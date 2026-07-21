@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/open-claw-lab/lead.schema.json",
+  "title": "Career lead",
+  "type": "object",
+  "required": ["id", "discoveredAt", "lane", "company", "opportunity", "hiringSignal", "contact", "fit"],
+  "properties": {
+    "id": { "type": "string", "minLength": 3 },
+    "discoveredAt": { "type": "string", "format": "date-time" },
+    "lane": { "enum": ["japan", "global"] },
+    "company": {
+      "type": "object",
+      "required": ["name", "domain"],
+      "properties": {
+        "name": { "type": "string" },
+        "domain": { "type": "string" },
+        "employeeCount": { "type": ["integer", "null"], "minimum": 1 },
+        "sizeEvidenceUrl": { "type": ["string", "null"], "format": "uri" },
+        "fundingSourceUrl": { "type": ["string", "null"], "format": "uri" }
+      }
+    },
+    "opportunity": {
+      "type": "object",
+      "required": ["title", "employmentType", "location", "workMode", "sourceUrl", "eligibilityEvidence"],
+      "properties": {
+        "title": { "type": "string" },
+        "employmentType": { "type": "string" },
+        "location": { "type": "string" },
+        "workMode": { "enum": ["remote", "onsite", "hybrid"] },
+        "remotePolicy": { "type": ["string", "null"] },
+        "eligibilityEvidence": { "type": "string" },
+        "sourceUrl": { "type": "string", "format": "uri" },
+        "minYearsExperience": { "type": ["number", "null"], "minimum": 0 },
+        "relocation": {
+          "type": "object",
+          "properties": {
+            "supported": { "type": "boolean" },
+            "evidenceUrl": { "type": ["string", "null"], "format": "uri" },
+            "evidence": { "type": ["string", "null"] }
+          }
+        }
+      }
+    },
+    "hiringSignal": {
+      "type": "object",
+      "required": ["kind", "url", "publishedAt", "quote"],
+      "properties": {
+        "kind": { "enum": ["official_job", "social_post", "vc_portfolio", "founder_post", "community_post"] },
+        "url": { "type": "string", "format": "uri" },
+        "publishedAt": { "type": "string", "format": "date" },
+        "quote": { "type": "string", "minLength": 8 }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "required": ["name", "role", "roleEvidenceUrl"],
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "roleEvidenceUrl": { "type": "string", "format": "uri" },
+        "publicProfileUrl": { "type": ["string", "null"], "format": "uri" },
+        "email": { "type": ["string", "null"], "format": "email" },
+        "emailEvidenceUrl": { "type": ["string", "null"], "format": "uri" },
+        "applicationUrl": { "type": ["string", "null"], "format": "uri" }
+      }
+    },
+    "fit": {
+      "type": "object",
+      "required": ["score", "reasons"],
+      "properties": {
+        "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "reasons": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "status": { "enum": ["verified", "rejected", "pending"] },
+        "reasons": { "type": "array", "items": { "type": "string" } },
+        "checkedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "dedupeKey": { "type": "string" }
+  },
+  "additionalProperties": true
+}
