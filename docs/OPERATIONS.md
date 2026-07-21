@@ -15,6 +15,8 @@
    crontab to a root-readable timestamped archive.
 2. Clone this repository to `/home/openclaw/open-claw-lab`.
 3. Copy `PROFILE.example.md` to `private/PROFILE.private.md` and populate it.
+   When migrating an older memory file, run `scripts/build-research-profile.mjs`
+   so email, phone, and personal profile URLs are removed from model prompts.
 4. Create `private/pipeline.env` from `.env.example`; keep it mode `0600`.
 5. Harden the live config atomically while preserving existing secret values:
    `node scripts/harden-openclaw-config.mjs --config ~/.openclaw/openclaw.json --telegram-user USER_ID --write`.

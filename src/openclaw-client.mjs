@@ -25,10 +25,16 @@ function parseEmbeddedJson(text) {
 }
 
 export function runAgent({ bin, agent, message, timeoutSeconds = 600 }) {
-  const stdout = execFileSync(bin, ["agent", "--agent", agent, "--message", message, "--json", "--timeout", String(timeoutSeconds)], {
-    encoding: "utf8",
-    maxBuffer: 20 * 1024 * 1024
-  });
+  let stdout;
+  try {
+    stdout = execFileSync(bin, ["agent", "--agent", agent, "--message", message, "--json", "--timeout", String(timeoutSeconds)], {
+      encoding: "utf8",
+      maxBuffer: 20 * 1024 * 1024
+    });
+  } catch (error) {
+    const diagnostic = `${error?.stderr || ""} ${error?.stdout || ""}`;
+    throw new Error(`${agent} failed: ${sanitizeAgentError(diagnostic)}`);
+  }
   let envelope;
   try { envelope = JSON.parse(stdout); } catch { envelope = stdout; }
   const strings = collectStrings(envelope).sort((a, b) => b.length - a.length);
@@ -36,6 +42,15 @@ export function runAgent({ bin, agent, message, timeoutSeconds = 600 }) {
     try { return parseEmbeddedJson(value); } catch { /* try next */ }
   }
   return parseEmbeddedJson(stdout);
+}
+
+export function sanitizeAgentError(value) {
+  const text = String(value || "");
+  if (/429|quota|rate.?limit/i.test(text)) return "model provider quota exceeded (429)";
+  if (/402|billing|insufficient balance/i.test(text)) return "model provider billing is unavailable";
+  if (/401|403|api.?key|authentication|unauthorized|forbidden/i.test(text)) return "model provider authentication failed";
+  if (/timed?\s*out|timeout/i.test(text)) return "model request timed out";
+  return "agent command failed; inspect the gateway journal for the provider error";
 }
 
 export function sendTelegram({ bin, target, message }) {

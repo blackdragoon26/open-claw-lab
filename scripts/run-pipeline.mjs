@@ -32,8 +32,7 @@ async function emailIsPublished(lead) {
   }
 }
 
-async function main() {
-  const args = parseArgs(process.argv.slice(2));
+async function main(args) {
   const bin = process.env.OPENCLAW_BIN || "openclaw";
   const dataDir = resolve(process.env.CAREER_DATA_DIR || "var");
   mkdirSync(dataDir, { recursive: true });
@@ -89,7 +88,16 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(`career pipeline failed: ${error.message}`);
+const args = parseArgs(process.argv.slice(2));
+main(args).catch((error) => {
+  const message = `Career Scout failed on ${args.date}: ${error.message}. No email or application was sent.`;
+  console.error(message);
+  if (!args.dryRun && process.env.TELEGRAM_TARGET) {
+    try {
+      sendTelegram({ bin: process.env.OPENCLAW_BIN || "openclaw", target: process.env.TELEGRAM_TARGET, message });
+    } catch {
+      console.error("Career Scout failure alert could not be delivered.");
+    }
+  }
   process.exitCode = 1;
 });
