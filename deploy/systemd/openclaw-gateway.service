@@ -10,7 +10,7 @@ Group=openclaw
 WorkingDirectory=/home/openclaw
 Environment=HOME=/home/openclaw
 Environment=OPENCLAW_NO_RESPAWN=1
-Environment=NODE_COMPILE_CACHE=/var/tmp/openclaw-compile-cache
+Environment=NODE_COMPILE_CACHE=/home/openclaw/.openclaw/compile-cache
 ExecStart=/home/openclaw/.npm-global/bin/openclaw gateway run
 Restart=on-failure
 RestartSec=5
@@ -18,7 +18,7 @@ NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=read-only
-ReadWritePaths=/home/openclaw/.openclaw /var/tmp/openclaw-compile-cache
+ReadWritePaths=/home/openclaw/.openclaw
 CapabilityBoundingSet=
 AmbientCapabilities=
 RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
