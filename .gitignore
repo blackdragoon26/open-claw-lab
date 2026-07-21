@@ -22,3 +22,5 @@ integrations/
 delivery-queue/
 founder_emails_list.md
 **/workspace-state.json
+**/openclaw-workspace-state.json
+**/openclaw-workspace-state.json.*.tmp
