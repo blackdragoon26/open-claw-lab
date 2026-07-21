@@ -18,7 +18,7 @@
 4. Create `private/pipeline.env` from `.env.example`; keep it mode `0600`.
 5. Harden the live config atomically while preserving existing secret values:
    `node scripts/harden-openclaw-config.mjs --config ~/.openclaw/openclaw.json --telegram-user USER_ID --write`.
-6. Install and enable the OpenClaw gateway service.
+6. Install `deploy/systemd/openclaw-gateway.service` as the gateway service.
 7. Install the service and timer files under `/etc/systemd/system`, reload
    systemd, and run a dry canary before enabling the timer.
 
