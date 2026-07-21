@@ -1,6 +1,6 @@
 [Unit]
 Description=OpenClaw evidence-gated career scout
-After=network-online.target openclaw-gateway.service
+After=network-online.target
 Wants=network-online.target
 
 [Service]

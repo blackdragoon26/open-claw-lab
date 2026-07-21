@@ -16,8 +16,8 @@
 2. Clone this repository to `/home/openclaw/open-claw-lab`.
 3. Copy `PROFILE.example.md` to `private/PROFILE.private.md` and populate it.
 4. Create `private/pipeline.env` from `.env.example`; keep it mode `0600`.
-5. Merge `config/openclaw.example.json` with the live config without copying
-   placeholder values over real secret references.
+5. Harden the live config atomically while preserving existing secret values:
+   `node scripts/harden-openclaw-config.mjs --config ~/.openclaw/openclaw.json --telegram-user USER_ID --write`.
 6. Install and enable the OpenClaw gateway service.
 7. Install the service and timer files under `/etc/systemd/system`, reload
    systemd, and run a dry canary before enabling the timer.
