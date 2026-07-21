@@ -20,8 +20,8 @@ export function hardenConfig(input, { telegramUser, repoRoot = "/home/openclaw/o
         workspace: "/home/openclaw/.openclaw/workspace-main",
         model: "google/gemini-2.5-flash",
         tools: {
-          profile: "messaging",
-          alsoAllow: ["group:web", "group:memory"],
+          profile: "minimal",
+          alsoAllow: ["group:messaging", "group:web", "group:memory"],
           deny: ["exec", "process", "write", "edit", "apply_patch", "browser", "nodes"]
         }
       },
@@ -65,7 +65,8 @@ export function hardenConfig(input, { telegramUser, repoRoot = "/home/openclaw/o
   config.tools = {
     ...(config.tools || {}),
     profile: "minimal",
-    fs: { ...(config.tools?.fs || {}), workspaceOnly: true }
+    fs: { ...(config.tools?.fs || {}), workspaceOnly: true },
+    elevated: { ...(config.tools?.elevated || {}), enabled: false }
   };
 
   config.commands = {
@@ -81,17 +82,11 @@ export function hardenConfig(input, { telegramUser, repoRoot = "/home/openclaw/o
       enabled: true,
       dmPolicy: "allowlist",
       allowFrom: [String(telegramUser)],
-      groupAllowFrom: [String(telegramUser)],
-      groups: {
-        ...(telegram.groups || {}),
-        "*": {
-          ...(telegram.groups?.["*"] || {}),
-          requireMention: true,
-          allowFrom: [String(telegramUser)]
-        }
-      }
+      groupPolicy: "disabled"
     }
   };
+  delete config.channels.telegram.groupAllowFrom;
+  delete config.channels.telegram.groups;
   return config;
 }
 

@@ -13,8 +13,8 @@
         "workspace": "/home/openclaw/.openclaw/workspace-main",
         "model": "google/gemini-2.5-flash",
         "tools": {
-          "profile": "messaging",
-          "alsoAllow": ["group:web", "group:memory"],
+          "profile": "minimal",
+          "alsoAllow": ["group:messaging", "group:web", "group:memory"],
           "deny": ["exec", "process", "write", "edit", "apply_patch", "browser", "nodes"]
         }
       },
@@ -58,6 +58,9 @@
   },
   "tools": {
     "profile": "minimal",
+    "elevated": {
+      "enabled": false
+    },
     "fs": {
       "workspaceOnly": true
     },
@@ -73,13 +76,7 @@
       "enabled": true,
       "dmPolicy": "allowlist",
       "allowFrom": ["replace-with-approved-user-id"],
-      "groupAllowFrom": ["replace-with-approved-user-id"],
-      "groups": {
-        "*": {
-          "requireMention": true,
-          "allowFrom": ["replace-with-approved-user-id"]
-        }
-      }
+      "groupPolicy": "disabled"
     }
   }
 }
